@@ -1,0 +1,88 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(docker:*)",
+      "Bash(doppler:*)",
+      "Bash(node:*)",
+      "Bash(echo:*)",
+      "Bash(ls:*)",
+      "Bash(pwd)",
+      "Bash(tree:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(cat:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(/mnt/c/Windows/System32/cmd.exe:*)",
+      "Bash(./.claude/hooks/*.sh:*)",
+      "WebFetch(domain:__PRODUCTION_DOMAIN__)",
+      "WebFetch(domain:__PREVIEW_DOMAIN__)",
+      "WebFetch(domain:supabase.com)",
+      "mcp__context7__*",
+      "mcp__zen__*"
+    ],
+    "deny": [
+      "Read(.env*)",
+      "Read(**/*secret*)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/credentials*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": {},
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/session-start.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": {},
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/session-end.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": {},
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/stop-quality-check.sh 2>/dev/null || true",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": {
+          "tool_name": "Bash"
+        },
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/pre-tool-safety.sh",
+            "timeout": 2000
+          }
+        ]
+      }
+    ]
+  }
+}
