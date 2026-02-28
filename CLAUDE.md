@@ -118,6 +118,14 @@ Rules in `.claude/rules/` auto-activate based on file patterns:
 - Stale detection warns at next session start (>2hr)
 - See Skill 29 for conflict prevention
 
+## Specs & Documentation
+
+All specifications from the original `housecall_pro_MCP` project were absorbed into this repo:
+- `docs/specs/` — Technical specs, date fix spec, L10 template, PDF docs
+- `docs/specs/hcp-mcp-spec/` — Node.js doc generator (`create_spec.js`), attachments
+- Merged on 2026-02-14 (commit 1562594), absorption finalized 2026-02-27
+- Original project archived to `../archive/housecall_pro_MCP/`
+
 ---
 
 *v1.0 - Template from claude-code-starter*
